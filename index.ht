@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChallengeUp</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+margin:0;
+padding:30px;
+}
+
+h1{
+text-align:center;
+margin-bottom:30px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+max-width:900px;
+margin:auto;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.title{
+font-size:20px;
+margin-bottom:10px;
+}
+
+.progressbar{
+height:10px;
+background:#334155;
+border-radius:10px;
+overflow:hidden;
+margin:10px 0;
+}
+
+.progress{
+height:100%;
+background:#22c55e;
+width:0%;
+}
+
+button{
+margin-top:10px;
+padding:10px;
+width:100%;
+border:none;
+background:#22c55e;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+background:#16a34a;
+}
+
+.days{
+font-size:14px;
+opacity:0.8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🔥 ChallengeUp</h1>
+
+<div class="grid">
+
+<div class="card">
+<div class="title">📚 Reading Challenge</div>
+<div class="progressbar">
+<div class="progress" id="p1"></div>
+</div>
+<div class="days">Days: <span id="d1">0</span>/30</div>
+<button onclick="checkin('read')">Complete Today</button>
+</div>
+
+<div class="card">
+<div class="title">💪 Fitness Challenge</div>
+<div class="progressbar">
+<div class="progress" id="p2"></div>
+</div>
+<div class="days">Days: <span id="d2">0</span>/30</div>
+<button onclick="checkin('fit')">Complete Today</button>
+</div>
+
+<div class="card">
+<div class="title">🌅 Wake Up Early</div>
+<div class="progressbar">
+<div class="progress" id="p3"></div>
+</div>
+<div class="days">Days: <span id="d3">0</span>/30</div>
+<button onclick="checkin('wake')">Complete Today</button>
+</div>
+
+</div>
+
+<script>
+
+let read = localStorage.getItem("read") || 0
+let fit = localStorage.getItem("fit") || 0
+let wake = localStorage.getItem("wake") || 0
+
+read=parseInt(read)
+fit=parseInt(fit)
+wake=parseInt(wake)
+
+function checkin(type){
+
+if(type=="read"){
+if(read<30){read++}
+localStorage.setItem("read",read)
+}
+
+if(type=="fit"){
+if(fit<30){fit++}
+localStorage.setItem("fit",fit)
+}
+
+if(type=="wake"){
+if(wake<30){wake++}
+localStorage.setItem("wake",wake)
+}
+
+update()
+
+}
+
+function update(){
+
+document.getElementById("d1").innerText=read
+document.getElementById("d2").innerText=fit
+document.getElementById("d3").innerText=wake
+
+document.getElementById("p1").style.width=(read/30*100)+"%"
+document.getElementById("p2").style.width=(fit/30*100)+"%"
+document.getElementById("p3").style.width=(wake/30*100)+"%"
+
+}
+
+update()
+
+</script>
+
+</body>
+</html>
